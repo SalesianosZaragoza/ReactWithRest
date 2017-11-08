@@ -6,7 +6,7 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 	<servlet>
-		<servlet-name>welcome</servlet-name>
+		<servlet-name>WelcomeServlet</servlet-name>
 		<servlet-class>es.salesianos.servlet.WelcomeServlet</servlet-class>
 	</servlet>
 

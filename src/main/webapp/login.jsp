@@ -11,7 +11,7 @@
 		<span>nombre:</span> 
 		<input type="text" name="nombre"> <br/>
 		<span>apellidos:</span> 
-		<input type="text" name="apellidos"><br/>
+		<input type="text" name="apellido"><br/>
 		<input type="submit">
 	</form>
 	</body>

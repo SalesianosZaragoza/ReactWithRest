@@ -29,7 +29,7 @@ public class WelcomeServlet extends HttpServlet {
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
 		dispatcher.forward(req, resp);
 	}
 }
