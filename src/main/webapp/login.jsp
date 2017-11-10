@@ -8,6 +8,8 @@
 </head>
 <body>
 	<form action="welcome" method="post">
+		<span>dni:</span> 
+		<input type="text" name="dni"><br/>
 		<span>nombre:</span> 
 		<input type="text" name="nombre"> <br/>
 		<span>apellidos:</span> 

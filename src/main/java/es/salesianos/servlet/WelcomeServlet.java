@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import connection.ConnectionH2;
+import connection.ConnectionManager;
+import es.salesianos.assembler.UserAssembler;
+import es.salesianos.model.User;
+
 public class WelcomeServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+	UserAssembler assembler = new UserAssembler();
+	ConnectionManager manager = new ConnectionH2();
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -26,6 +30,8 @@ public class WelcomeServlet extends HttpServlet {
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		User user = assembler.createUserFromRequest(req);
+		manager.insert(user);
 		redirect(req, resp);
 	}
 
