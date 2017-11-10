@@ -75,4 +75,14 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 	}
 
+	public User search(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void update(User user) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
