@@ -1,10 +1,13 @@
 package connection;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+
 
 import es.salesianos.model.User;
 
@@ -76,11 +79,82 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 	public User search(User user) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			
+			preparedStatement = connection.prepareStatement("SELECT user SET " +
+					"dni= ?, nombre = ? WHERE apellido= ?");
+
+			preparedStatement.setString(1, user.getDni());
+			preparedStatement.setString(2, user.getNombre());
+			preparedStatement.setString(3,user.getApellido());
+			preparedStatement.executeUpdate();
+
+			System.out.println("UPDATE user SET " +
+					"dni= ?, nombre = ? WHERE apellido= ?");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		// TODO Auto-generated method stub
-		return null;
+
+	
+		
+		return user;
 	}
 
 	public void update(User user) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			
+			preparedStatement = connection.prepareStatement("UPDATE user SET " +
+					"dni= ?, nombre = ? WHERE apellido= ?");
+
+			preparedStatement.setString(1, user.getDni());
+			preparedStatement.setString(2, user.getNombre());
+			preparedStatement.setString(3,user.getApellido());
+			preparedStatement.executeUpdate();
+
+			System.out.println("UPDATE user SET " +
+					"dni= ?, nombre = ? WHERE apellido= ?");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		// TODO Auto-generated method stub
 
 	}
