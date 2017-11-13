@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import es.salesianos.model.User;
 
 public class ConnectionH2 implements ConnectionManager {
-
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
 	public void insert(User userFormulario) {
@@ -76,13 +75,56 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 	public User search(User user) {
+		User person = new User();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Connection conn = open(jdbcUrl);
+			preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE id = ?");
+			preparedStatement.setString(3, user.getDni());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				person.setDni(resultSet.getString("id"));
+				person.setNombre(resultSet.getString("first_name"));
+				person.setApellido(resultSet.getString("last_name"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(preparedStatement);
+			close(connection);
+		}
 		// TODO Auto-generated method stub
-		return null;
+		return user;
 	}
 
 	public void update(User user) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 
+		try {
+			Connection conn = open(jdbcUrl);
+			preparedStatement = connection.prepareStatement("UPDATE person SET " +
+					"first_name = ?, last_name = ? WHERE id = ?");
+
+			preparedStatement.setString(1, user.getNombre());
+			preparedStatement.setString(2, user.getApellido());
+			preparedStatement.setString(3, user.getDni());
+			preparedStatement.executeUpdate();
+
+			System.out.println("UPDATE person SET " +
+					"first_name = ?, last_name = ? WHERE id = ?");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(preparedStatement);
+			close(connection);
+		}
 	}
 
 }
