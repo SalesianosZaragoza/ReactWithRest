@@ -32,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		User user = assembler.createUserFromRequest(req);
 
-		if (manager.search(user) == null) {
+		if (manager.search(user).isPresent()) {
 			manager.insert(user);
 		} else {
 			manager.update(user);

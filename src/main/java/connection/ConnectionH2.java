@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
+import java.util.Optional;
 
 import es.salesianos.model.User;
 
@@ -77,19 +76,20 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 	}
 
-	public User search(User user) {
-		User person = new User();
-		Connection connection = null;
+	public Optional<User> search(User user) {
+		User person = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		Connection conn = null;
 
 		try {
-			Connection conn = open(jdbcUrl);
-			preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE dni = ?");
-			preparedStatement.setString(1, person.getDni());
+			conn = open(jdbcUrl);
+			preparedStatement = conn.prepareStatement("SELECT * FROM person WHERE dni = ?");
+			preparedStatement.setString(1, user.getDni());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
+				person = new User();
 				person.setDni(resultSet.getString("dni"));
 				person.setNombre(resultSet.getString("nombre"));
 				person.setApellido(resultSet.getString("apellido"));
@@ -99,20 +99,20 @@ public class ConnectionH2 implements ConnectionManager {
 			e.printStackTrace();
 		} finally {
 			close(preparedStatement);
-			close(connection);
+			close(conn);
 		}
 
-		return person;
+		return Optional.ofNullable(person);
 		
 	}
 
 	public void update(User user) {
-		Connection connection = null;
+		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 
 		try {
-			Connection conn = open(jdbcUrl);
-			preparedStatement = connection.prepareStatement("UPDATE user SET " +
+			conn = open(jdbcUrl);
+			preparedStatement = conn.prepareStatement("UPDATE user SET " +
 					"nombre = ?, apellido = ? WHERE dni = ?");
 
 			preparedStatement.setString(1, user.getNombre());
@@ -127,7 +127,7 @@ public class ConnectionH2 implements ConnectionManager {
 			e.printStackTrace();
 		} finally {
 			close(preparedStatement);
-			close(connection);
+			close(conn);
 		}
 	}
 

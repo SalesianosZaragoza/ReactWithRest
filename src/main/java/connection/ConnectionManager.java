@@ -1,6 +1,7 @@
 package connection;
 
 import java.sql.Connection;
+import java.util.Optional;
 
 import es.salesianos.model.User;
 
@@ -12,7 +13,7 @@ public interface ConnectionManager {
 
 	void insert(User user);
 
-	User search(User user);
+	Optional<User> search(User user);
 
 	void update(User user);
 
