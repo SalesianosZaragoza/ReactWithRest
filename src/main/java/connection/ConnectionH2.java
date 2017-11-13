@@ -75,21 +75,21 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 	public User search(User user) {
-		User person = new User();
+		User user2 = new User();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			Connection conn = open(jdbcUrl);
-			preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE id = ?");
+			preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE dni = ?");
 			preparedStatement.setString(3, user.getDni());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				person.setDni(resultSet.getString("id"));
-				person.setNombre(resultSet.getString("first_name"));
-				person.setApellido(resultSet.getString("last_name"));
+				user2.setDni(resultSet.getString("dni"));
+				user2.setNombre(resultSet.getString("nombre"));
+				user2.setApellido(resultSet.getString("apellido"));
 			}
 
 		} catch (Exception e) {
@@ -108,16 +108,16 @@ public class ConnectionH2 implements ConnectionManager {
 
 		try {
 			Connection conn = open(jdbcUrl);
-			preparedStatement = connection.prepareStatement("UPDATE person SET " +
-					"first_name = ?, last_name = ? WHERE id = ?");
+			preparedStatement = connection.prepareStatement("UPDATE user SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
 
 			preparedStatement.setString(1, user.getNombre());
 			preparedStatement.setString(2, user.getApellido());
 			preparedStatement.setString(3, user.getDni());
 			preparedStatement.executeUpdate();
 
-			System.out.println("UPDATE person SET " +
-					"first_name = ?, last_name = ? WHERE id = ?");
+			System.out.println("UPDATE user SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
