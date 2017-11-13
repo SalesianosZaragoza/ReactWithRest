@@ -14,6 +14,17 @@
 		<servlet-name>WelcomeServlet</servlet-name>
 		<url-pattern>/welcome</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>ListUserServlet</servlet-name>
+        <servlet-class>es.salesianos.servlet.ListUserServlet</servlet-class>
+    </servlet>
+	
+	
+	<servlet-mapping>
+        <servlet-name>ListUserServlet</servlet-name>
+        <url-pattern>/cargarListado</url-pattern>
+    </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
