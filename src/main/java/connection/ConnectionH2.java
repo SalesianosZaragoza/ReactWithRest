@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 import es.salesianos.model.User;
 
 public class ConnectionH2 implements ConnectionManager {
@@ -17,7 +19,7 @@ public class ConnectionH2 implements ConnectionManager {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
+			.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
 			preparedStatement.setString(1, userFormulario.getDni());
 			preparedStatement.setString(2, userFormulario.getNombre());
 			preparedStatement.setString(3, userFormulario.getApellido());
@@ -76,13 +78,59 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 	public User search(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User person = new User();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			Connection conn = open(jdbcUrl);
+			preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE dni = ?");
+			preparedStatement.setString(1, person.getDni());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				person.setDni(resultSet.getString("dni"));
+				person.setNombre(resultSet.getString("nombre"));
+				person.setApellido(resultSet.getString("apellido"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(preparedStatement);
+			close(connection);
+		}
+
+		return person;
+		
 	}
 
 	public void update(User user) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			Connection conn = open(jdbcUrl);
+			preparedStatement = connection.prepareStatement("UPDATE user SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
+
+			preparedStatement.setString(1, user.getNombre());
+			preparedStatement.setString(2, user.getApellido());
+			preparedStatement.setString(3, user.getDni());
+			preparedStatement.executeUpdate();
+
+			System.out.println("UPDATE user SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(preparedStatement);
+			close(connection);
+		}
+	}
 
 	}
 
-}
+
