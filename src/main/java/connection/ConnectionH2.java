@@ -75,4 +75,92 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 	}
 
+		public User searchByDni(String dni) {
+		User userFormulario = new User();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = ConnectionConfiguration.getConnection();
+			preparedStatement = connection.prepareStatement("SELECT * FROM userFormulario WHERE dni = ?");
+			preparedStatement.setString(1, dni);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				userFormulario.setId(resultSet.getString("dni"));
+				userFormulario.setFirstName(resultSet.getString("nombre"));
+				userFormulario.setLastName(resultSet.getString("apellido"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	public void update(User userFormulario) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = open(jdbcUrl);
+			preparedStatement = connection.prepareStatement("UPDATE userFormulario SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
+
+			preparedStatement.setString(1, userFormulario.getNombre());
+			preparedStatement.setString(2, userFormulario.getApellido());
+			preparedStatement.setString(3, userFormulario.getDni);
+			preparedStatement.executeUpdate();
+
+			System.out.println("UPDATE userFormulario SET " +
+					"nombre = ?, apellido = ? WHERE dni = ?");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }
