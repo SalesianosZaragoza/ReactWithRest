@@ -76,12 +76,11 @@ public class ConnectionH2 implements ConnectionManager {
 
 	public User search(User user) {
 		User user2 = new User();
-		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-
+		Connection connection = null;;
 		try {
-			Connection conn = open(jdbcUrl);
+			connection = open(jdbcUrl);
 			preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE dni = ?");
 			preparedStatement.setString(3, user.getDni());
 			resultSet = preparedStatement.executeQuery();
@@ -99,15 +98,14 @@ public class ConnectionH2 implements ConnectionManager {
 			close(connection);
 		}
 		// TODO Auto-generated method stub
-		return user;
+		return null;
 	}
 
 	public void update(User user) {
-		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		Connection connection = null;
 		try {
-			Connection conn = open(jdbcUrl);
+			connection = open(jdbcUrl);
 			preparedStatement = connection.prepareStatement("UPDATE user SET " +
 					"nombre = ?, apellido = ? WHERE dni = ?");
 
