@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import es.salesianos.model.User;
@@ -129,6 +130,11 @@ public class ConnectionH2 implements ConnectionManager {
 			close(preparedStatement);
 			close(conn);
 		}
+	}
+
+	public List<User> listAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	}

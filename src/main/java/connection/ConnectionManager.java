@@ -1,6 +1,7 @@
 package connection;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Optional;
 
 import es.salesianos.model.User;
@@ -16,5 +17,7 @@ public interface ConnectionManager {
 	Optional<User> search(User user);
 
 	void update(User user);
+
+	List<User> listAllUsers();
 
 }
