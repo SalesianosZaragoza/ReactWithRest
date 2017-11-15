@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connection.ConnectionH2;
-import connection.ConnectionManager;
-import es.salesianos.assembler.UserAssembler;
-import es.salesianos.model.User;
+import es.salesianos.service.Service;
+import es.salesianos.service.UserService;
 
 public class WelcomeServlet extends HttpServlet {
 
-	UserAssembler assembler = new UserAssembler();
-	ConnectionManager manager = new ConnectionH2();
+
+	Service service = new UserService();
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -30,13 +28,7 @@ public class WelcomeServlet extends HttpServlet {
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		User user = assembler.createUserFromRequest(req);
-
-		if (manager.search(user).isPresent()) {
-			manager.insert(user);
-		} else {
-			manager.update(user);
-		}
+		service.createNewUserFromRequest(req);
 		redirect(req, resp);
 	}
 

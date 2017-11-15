@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 import es.salesianos.model.User;
 
 public class ConnectionH2 implements ConnectionManager {
@@ -108,6 +107,7 @@ public class ConnectionH2 implements ConnectionManager {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
 			close(conn);
@@ -136,6 +136,7 @@ public class ConnectionH2 implements ConnectionManager {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
 			close(conn);
@@ -164,6 +165,7 @@ public class ConnectionH2 implements ConnectionManager {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			close(resultSet);
 			close(statement);
