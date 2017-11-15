@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 import es.salesianos.model.User;
 
@@ -18,8 +21,7 @@ public class ConnectionH2 implements ConnectionManager {
 		Connection conn = open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn
-			.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
 			preparedStatement.setString(1, userFormulario.getDni());
 			preparedStatement.setString(2, userFormulario.getNombre());
 			preparedStatement.setString(3, userFormulario.getApellido());
@@ -58,7 +60,15 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 
 	}
-
+	private void close(Statement statement) {
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
@@ -133,10 +143,36 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 	public List<User> listAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> users = new ArrayList<User>();
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			conn = open(jdbcUrl);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM user");
+
+			while (resultSet.next()) {
+				User person = new User();
+				person.setDni(resultSet.getString("dni"));
+				person.setNombre(resultSet.getString("nombre"));
+				person.setApellido(resultSet.getString("apellido"));
+
+				users.add(person);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(resultSet);
+			close(statement);
+			close(conn);
+		}
+
+		return users;
 	}
 
-	}
+}
 
 
