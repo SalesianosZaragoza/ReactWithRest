@@ -1,4 +1,4 @@
-package connection;
+package es.salesianos.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,8 +35,6 @@ public class ConnectionH2 implements ConnectionManager {
 		close(conn);
 	}
 
-
-
 	public Connection open(String jdbcUrl) {
 		Connection conn = null;
 		try {
@@ -59,6 +57,7 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 
 	}
+
 	private void close(Statement statement) {
 		if (statement != null) {
 			try {
@@ -68,21 +67,26 @@ public class ConnectionH2 implements ConnectionManager {
 			}
 		}
 	}
+
 	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+		if (prepareStatement != null) {
+			try {
+				prepareStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
 	private void close(ResultSet resultSet) {
-		try {
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -94,7 +98,7 @@ public class ConnectionH2 implements ConnectionManager {
 
 		try {
 			conn = open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM person WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
 			preparedStatement.setString(1, user.getDni());
 			resultSet = preparedStatement.executeQuery();
 
@@ -114,7 +118,7 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 
 		return Optional.ofNullable(person);
-		
+
 	}
 
 	public void update(User user) {
@@ -123,16 +127,14 @@ public class ConnectionH2 implements ConnectionManager {
 
 		try {
 			conn = open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE user SET " +
-					"nombre = ?, apellido = ? WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
 			preparedStatement.setString(1, user.getNombre());
 			preparedStatement.setString(2, user.getApellido());
 			preparedStatement.setString(3, user.getDni());
 			preparedStatement.executeUpdate();
 
-			System.out.println("UPDATE user SET " +
-					"nombre = ?, apellido = ? WHERE dni = ?");
+			System.out.println("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -176,5 +178,3 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 
 }
-
-

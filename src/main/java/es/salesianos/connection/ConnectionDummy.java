@@ -1,4 +1,4 @@
-package connection;
+package es.salesianos.connection;
 
 import java.sql.Connection;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import es.salesianos.model.User;
 
-@Component
+@Component("dummy")
 public class ConnectionDummy implements ConnectionManager {
 
 	public Connection open(String jdbcUrl) {

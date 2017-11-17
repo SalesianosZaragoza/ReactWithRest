@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import connection.ConnectionH2;
-import connection.ConnectionManager;
+import es.salesianos.connection.ConnectionH2;
+import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.User;
 
 public class ListUserServlet extends HttpServlet {
@@ -20,7 +20,7 @@ public class ListUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<User> listAllUsers = manager.listAllUsers();
-		req.setAttribute("users", listAllUsers);
+		req.getSession().setAttribute("users", listAllUsers);
 		redirect(req, resp);
 	}
 

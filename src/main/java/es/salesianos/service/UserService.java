@@ -2,17 +2,15 @@ package es.salesianos.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import connection.ConnectionManager;
 import es.salesianos.assembler.UserAssembler;
+import es.salesianos.connection.ConnectionH2;
+import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.User;
 
 public class UserService implements Service {
 
 	UserAssembler assembler = new UserAssembler();
-	@Autowired
-	private ConnectionManager manager;
+	private ConnectionManager manager = new ConnectionH2();
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
 		User user = assembler.createUserFromRequest(req);
