@@ -34,6 +34,11 @@
 		</c:forEach>
 	</tbody>
 </table>
+<select>
+		<c:forEach var="user" items="${users}">
+            <option value="${user.nombre}">${user.nombre}</option>
+		</c:forEach>
+</select>
 
 </body>
 </html>
