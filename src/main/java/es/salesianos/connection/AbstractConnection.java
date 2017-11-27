@@ -13,7 +13,7 @@ public abstract class AbstractConnection {
 		Connection conn = null;
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection(jdbcUrl + ";INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'", "sa",
+			conn = DriverManager.getConnection(jdbcUrl, "sa",
 					"");
 		} catch (Exception e) {
 			e.printStackTrace();

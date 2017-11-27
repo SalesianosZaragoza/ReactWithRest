@@ -11,12 +11,14 @@ import java.util.Optional;
 
 import es.salesianos.model.User;
 
-public class UserRepository extends AbstractConnection implements ConnectionManager {
+public class UserRepository {
+
+	AbstractConnection connection;
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
 	public void insert(User userFormulario) {
-		Connection conn = open(jdbcUrl);
+		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
@@ -28,10 +30,10 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
+			connection.close(preparedStatement);
 		}
 
-		close(conn);
+		connection.close(conn);
 	}
 
 
@@ -45,7 +47,7 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 		Connection conn = null;
 
 		try {
-			conn = open(jdbcUrl);
+			conn = connection.open(jdbcUrl);
 			preparedStatement = conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
 			preparedStatement.setString(1, user.getDni());
 			resultSet = preparedStatement.executeQuery();
@@ -61,8 +63,8 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			connection.close(preparedStatement);
+			connection.close(conn);
 		}
 
 		return Optional.ofNullable(person);
@@ -74,7 +76,7 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 		PreparedStatement preparedStatement = null;
 
 		try {
-			conn = open(jdbcUrl);
+			conn = connection.open(jdbcUrl);
 			preparedStatement = conn.prepareStatement("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
 			preparedStatement.setString(1, user.getNombre());
@@ -88,8 +90,8 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			connection.close(preparedStatement);
+			connection.close(conn);
 		}
 	}
 
@@ -100,7 +102,7 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 		ResultSet resultSet = null;
 
 		try {
-			conn = open(jdbcUrl);
+			conn = connection.open(jdbcUrl);
 			statement = conn.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM user");
 
@@ -117,9 +119,9 @@ public class UserRepository extends AbstractConnection implements ConnectionMana
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(statement);
-			close(conn);
+			connection.close(resultSet);
+			connection.close(statement);
+			connection.close(conn);
 		}
 
 		return users;

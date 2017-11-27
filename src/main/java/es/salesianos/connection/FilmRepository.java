@@ -75,14 +75,13 @@ public class FilmRepository {
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("UPDATE film SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
-			preparedStatement.setString(1, user.getNombre());
-			preparedStatement.setString(2, user.getApellido());
-			preparedStatement.setString(3, user.getDni());
+			preparedStatement.setInt(1, user.getId());
+			preparedStatement.setString(2, user.getTittle());
 			preparedStatement.executeUpdate();
 
-			System.out.println("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
+			System.out.println("UPDATE film SET " + "tittle = ? WHERE codFilm = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,17 +101,14 @@ public class FilmRepository {
 		try {
 			conn = connection.open(jdbcUrl);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM user");
+			resultSet = statement.executeQuery("SELECT * FROM film");
 
 			while (resultSet.next()) {
 				Film person = new Film();
-				person.setDni(resultSet.getString("dni"));
-				person.setNombre(resultSet.getString("nombre"));
-				person.setApellido(resultSet.getString("apellido"));
-
+				person.setId(resultSet.getInt("codFilm"));
+				person.setTittle(resultSet.getString("nombre"));
 				users.add(person);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
