@@ -1,6 +1,6 @@
 package es.salesianos.model;
 
-public class User {
+public class User implements IEntity<String> {
 
 	String dni;
 	String nombre;
@@ -28,6 +28,18 @@ public class User {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
