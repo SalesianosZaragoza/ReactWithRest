@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.connection.UserRepository;
 import es.salesianos.model.User;
+import es.salesianos.repository.UserRepository;
 
 public class ListUserServlet extends HttpServlet {
 

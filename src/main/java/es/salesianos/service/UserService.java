@@ -3,8 +3,8 @@ package es.salesianos.service;
 import javax.servlet.http.HttpServletRequest;
 
 import es.salesianos.assembler.UserAssembler;
-import es.salesianos.connection.UserRepository;
 import es.salesianos.model.User;
+import es.salesianos.repository.UserRepository;
 
 public class UserService implements Service {
 

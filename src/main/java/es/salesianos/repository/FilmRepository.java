@@ -1,4 +1,4 @@
-package es.salesianos.connection;
+package es.salesianos.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,28 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import es.salesianos.connection.AbstractConnection;
 import es.salesianos.model.Film;
-import es.salesianos.model.IEntity;
-import es.salesianos.model.User;
 
 public class FilmRepository {
 
-	private IEntity entity = new User();
-	private IEntity entity2 = new IEntity() {
-
-		@Override
-		public Object getId() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void setId(Object id) {
-			// TODO Auto-generated method stub
-
-		}
-	};
-
+	
 	private AbstractConnection connection = new AbstractConnection() {
 
 		@Override
@@ -46,24 +30,6 @@ public class FilmRepository {
 		@Override
 		public String getDatabasePassword() {
 			return "";
-		}
-	};
-	
-	private AbstractConnection connectionPostgres = new AbstractConnection() {
-
-		@Override
-		public String getDriver() {
-			return "org.postgresql.Driver";
-		}
-
-		@Override
-		public String getDatabaseUser() {
-			return "postgres";
-		}
-
-		@Override
-		public String getDatabasePassword() {
-			return "postgres";
 		}
 	};
 

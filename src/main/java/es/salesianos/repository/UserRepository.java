@@ -1,4 +1,4 @@
-package es.salesianos.connection;
+package es.salesianos.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import es.salesianos.connection.AbstractConnection;
 import es.salesianos.model.User;
 
 public class UserRepository {
