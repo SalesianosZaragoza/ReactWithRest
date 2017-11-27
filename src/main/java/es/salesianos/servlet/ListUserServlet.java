@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.connection.ConnectionH2;
+import es.salesianos.connection.UserRepository;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.User;
 
 public class ListUserServlet extends HttpServlet {
 
-	ConnectionManager manager = new ConnectionH2();
+	ConnectionManager manager = new UserRepository();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

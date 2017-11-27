@@ -3,14 +3,14 @@ package es.salesianos.service;
 import javax.servlet.http.HttpServletRequest;
 
 import es.salesianos.assembler.UserAssembler;
-import es.salesianos.connection.ConnectionH2;
+import es.salesianos.connection.UserRepository;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.User;
 
 public class UserService implements Service {
 
 	UserAssembler assembler = new UserAssembler();
-	private ConnectionManager manager = new ConnectionH2();
+	private ConnectionManager manager = new UserRepository();
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
 		User user = assembler.createUserFromRequest(req);

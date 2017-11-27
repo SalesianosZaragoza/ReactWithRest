@@ -23,14 +23,12 @@ public class Film implements IEntity<Integer> {
 
 	@Override
 	public Integer getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return getCodFilm();
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-
+		setCodFilm(id);
 	}
 
 }

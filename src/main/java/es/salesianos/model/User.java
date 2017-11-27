@@ -32,14 +32,12 @@ public class User implements IEntity<String> {
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDni();
 	}
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
-
+		setDni(id);
 	}
 
 }
