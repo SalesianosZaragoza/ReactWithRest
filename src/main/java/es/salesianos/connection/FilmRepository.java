@@ -13,7 +13,41 @@ import es.salesianos.model.Film;
 
 public class FilmRepository {
 
-	private AbstractConnection connection;
+	private AbstractConnection connection = new AbstractConnection() {
+
+		@Override
+		public String getDriver() {
+			return "org.h2.Driver";
+		}
+
+		@Override
+		public String getDatabaseUser() {
+			return "sa";
+		}
+
+		@Override
+		public String getDatabasePassword() {
+			return "";
+		}
+	};
+	
+	private AbstractConnection connectionPostgres = new AbstractConnection() {
+
+		@Override
+		public String getDriver() {
+			return "org.postgresql.Driver";
+		}
+
+		@Override
+		public String getDatabaseUser() {
+			return "postgres";
+		}
+
+		@Override
+		public String getDatabasePassword() {
+			return "postgres";
+		}
+	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 

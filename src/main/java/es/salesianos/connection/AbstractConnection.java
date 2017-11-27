@@ -9,12 +9,17 @@ import java.sql.Statement;
 
 public abstract class AbstractConnection {
 
+	public abstract String getDriver();
+
+	public abstract String getDatabaseUser();
+
+	public abstract String getDatabasePassword();
+
 	public Connection open(String jdbcUrl) {
 		Connection conn = null;
 		try {
-			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection(jdbcUrl, "sa",
-					"");
+			Class.forName(getDriver());
+			conn = DriverManager.getConnection(jdbcUrl, getDatabaseUser(), getDatabasePassword());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
