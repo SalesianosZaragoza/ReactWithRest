@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_3_1.xsd"
     version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
-
+<!-- 
 	<servlet>
 		<servlet-name>WelcomeServlet</servlet-name>
 		<servlet-class>es.salesianos.servlet.WelcomeServlet</servlet-class>
@@ -39,4 +39,5 @@
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 
+ -->
 </web-app>

@@ -1,6 +1,8 @@
 package es.salesianos.model;
 
-public interface IEntity<T> {
+import java.io.Serializable;
+
+public interface IEntity<T> extends Serializable {
 
 	public T getId();
 
