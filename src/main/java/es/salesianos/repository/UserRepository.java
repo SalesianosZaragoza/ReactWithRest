@@ -3,7 +3,6 @@ package es.salesianos.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +18,20 @@ public class UserRepository {
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
 	public void insert(User userFormulario) {
-		Connection conn = connection.open(jdbcUrl);
-		PreparedStatement preparedStatement = null;
-		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
-			preparedStatement.setString(1, userFormulario.getDni());
-			preparedStatement.setString(2, userFormulario.getNombre());
-			preparedStatement.setString(3, userFormulario.getApellido());
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			connection.close(preparedStatement);
-		}
-
-		connection.close(conn);
+		return;
+		/*
+		 * Connection conn = connection.open(jdbcUrl); PreparedStatement
+		 * preparedStatement = null; try { preparedStatement =
+		 * conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" +
+		 * "VALUES (?, ?, ?)"); preparedStatement.setString(1, userFormulario.getDni());
+		 * preparedStatement.setString(2, userFormulario.getNombre());
+		 * preparedStatement.setString(3, userFormulario.getApellido());
+		 * preparedStatement.executeUpdate(); } catch (SQLException e) {
+		 * e.printStackTrace(); throw new RuntimeException(e); } finally {
+		 * connection.close(preparedStatement); }
+		 * 
+		 * connection.close(conn);
+		 */
 	}
 
 
@@ -42,34 +39,26 @@ public class UserRepository {
 
 
 	public Optional<User> search(User user) {
-		User person = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		Connection conn = null;
-
-		try {
-			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
-			preparedStatement.setString(1, user.getDni());
-			resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-				person = new User();
-				person.setDni(resultSet.getString("dni"));
-				person.setNombre(resultSet.getString("nombre"));
-				person.setApellido(resultSet.getString("apellido"));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			connection.close(preparedStatement);
-			connection.close(conn);
-		}
-
-		return Optional.ofNullable(person);
-
+		return Optional.empty();
+		/*
+		 * User person = null; PreparedStatement preparedStatement = null; ResultSet
+		 * resultSet = null; Connection conn = null;
+		 * 
+		 * try { conn = connection.open(jdbcUrl); preparedStatement =
+		 * conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
+		 * preparedStatement.setString(1, user.getDni()); resultSet =
+		 * preparedStatement.executeQuery();
+		 * 
+		 * while (resultSet.next()) { person = new User();
+		 * person.setDni(resultSet.getString("dni"));
+		 * person.setNombre(resultSet.getString("nombre"));
+		 * person.setApellido(resultSet.getString("apellido")); }
+		 * 
+		 * } catch (Exception e) { e.printStackTrace(); throw new RuntimeException(e); }
+		 * finally { connection.close(preparedStatement); connection.close(conn); }
+		 * 
+		 * return Optional.ofNullable(person);
+		 */
 	}
 
 	public void update(User user) {

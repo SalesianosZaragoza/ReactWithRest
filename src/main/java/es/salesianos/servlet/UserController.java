@@ -1,13 +1,19 @@
 package es.salesianos.servlet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.salesianos.model.User;
+import es.salesianos.service.Service;
+
 @Controller
 public class UserController {
+
+	@Autowired
+	private Service service;
 
 	@GetMapping("welcome")
 	public String getWelcome() {
@@ -19,12 +25,22 @@ public class UserController {
 		return "listado";
 	}
 
-	@PostMapping("/saveDetails") // it only support port method
-	public String saveDetails(@RequestParam("employeeName") String employeeName,
-			@RequestParam("employeeEmail") String employeeEmail, ModelMap modelMap) {
-		// write your code to save details
-		modelMap.put("employeeName", employeeName);
-		modelMap.put("employeeEmail", employeeEmail);
-		return "viewDetails"; // welcome is view name. It will call welcome.jsp
+	@PostMapping("/welcome") // it only support port method
+	public String saveUser(@RequestParam("dni") String dni, @RequestParam("nombre") String nombre,
+			@RequestParam("apellido") String apellido) {
+		User user = new User();
+		user.setDni(dni);
+		user.setNombre(nombre);
+		user.setApellido(apellido);
+		service.insertOrupdateUser(user);
+		return "welcome";
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 }
