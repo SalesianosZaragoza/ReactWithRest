@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import es.salesianos.model.User;
 import es.salesianos.service.Service;
@@ -15,15 +18,20 @@ public class UserController {
 	@Autowired
 	private Service service;
 
-	@GetMapping("welcome")
-	public String getWelcome() {
-		return "login";
+	// @GetMapping("welcome")
+	// public String getWelcome() {
+	// return "login";
+	// }
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public ModelAndView user() {
+		return new ModelAndView("login", "command", new User());
 	}
 
 	@GetMapping("listado")
 	public String getlistado() {
 		return "listado";
 	}
+
 
 	@PostMapping("/welcome") // it only support port method
 	public String saveUser(@ModelAttribute User user) {
