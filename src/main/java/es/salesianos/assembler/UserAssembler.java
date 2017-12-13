@@ -2,8 +2,11 @@ package es.salesianos.assembler;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Component;
+
 import es.salesianos.model.User;
 
+@Component
 public class UserAssembler {
 
 	public User createUserFromRequest(HttpServletRequest request) {

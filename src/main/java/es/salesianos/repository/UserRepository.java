@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import es.salesianos.connection.AbstractConnection;
 import es.salesianos.model.User;
 
+@Component
 public class UserRepository {
 
 	AbstractConnection connection;

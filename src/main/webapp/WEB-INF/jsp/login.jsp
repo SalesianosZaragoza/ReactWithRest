@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri = "http://www.springframework.org/tags/form" 
+prefix = "form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,14 +10,14 @@
 <title>Formulario de datos</title>
 </head>
 <body>
-	<form action="welcome" method="post">
+	<form:form action="welcome" method="post">
 		<span>dni:</span> 
-		<input type="text" name="dni"><br/>
+		<form:input  type="text" path="dni"/><br/>
 		<span>nombre:</span> 
-		<input type="text" name="nombre"> <br/>
+		<form:input type="text" path="nombre"/> <br/>
 		<span>apellidos:</span> 
-		<input type="text" name="apellido"><br/>
-		<input type="submit">
-	</form>
+		<form:input type="text" path="apellido"/><br/>
+		<input type="submit"/>
+	</form:form>
 	</body>
 </html>

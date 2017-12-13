@@ -2,6 +2,7 @@ package es.salesianos.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.salesianos.assembler.UserAssembler;
@@ -11,8 +12,10 @@ import es.salesianos.repository.UserRepository;
 @Component
 public class UserService implements Service {
 
-	UserAssembler assembler = new UserAssembler();
-	private UserRepository repository = new UserRepository();
+	@Autowired
+	private UserAssembler assembler;
+	@Autowired
+	private UserRepository repository;
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
 		User user = assembler.createUserFromRequest(req);
@@ -28,5 +31,20 @@ public class UserService implements Service {
 		}
 	}
 
+	public UserAssembler getAssembler() {
+		return assembler;
+	}
+
+	public void setAssembler(UserAssembler assembler) {
+		this.assembler = assembler;
+	}
+
+	public UserRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(UserRepository repository) {
+		this.repository = repository;
+	}
 
 }
