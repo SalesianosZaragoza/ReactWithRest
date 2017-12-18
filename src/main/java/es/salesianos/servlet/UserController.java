@@ -1,7 +1,6 @@
 package es.salesianos.servlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,14 +14,13 @@ import es.salesianos.service.Service;
 public class UserController {
 
 	@Autowired
-	@Qualifier(value = "authorService")
+	// @Qualifier(value = "authorService")
 	private Service service;
 
 	// public String getWelcome() {
 	// return "login";
 	// }
-	// @RequestMapping(value = "/welcome",
-	// method = RequestMethod.GET)
+	// @RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	@GetMapping("/welcome")
 	public ModelAndView user() {
 		return new ModelAndView("login", "command", new User());
