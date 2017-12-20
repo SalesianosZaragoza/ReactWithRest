@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.salesianos.service.Service;
 import es.salesianos.service.UserService;
 
-public class WelcomeServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 
 
 	Service service = new UserService();
@@ -19,21 +19,25 @@ public class WelcomeServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doAction(req, resp);
+		loginRedirect(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doAction(req, resp);
+		req.setAttribute("dni", req.getParameter("dni"));
+		confirmationRedirect(req, resp);
 	}
 
-	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		service.createNewUserFromRequest(req);
-		redirect(req, resp);
+
+	protected void confirmationRedirect(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException, ServletException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirmation.jsp");
+		dispatcher.forward(req, resp);
 	}
 
-	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
+	protected void loginRedirect(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException, ServletException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

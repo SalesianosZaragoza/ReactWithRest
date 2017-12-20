@@ -1,4 +1,4 @@
-package connection;
+package es.salesianos.connection;
 
 import java.sql.Connection;
 

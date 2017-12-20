@@ -1,4 +1,4 @@
-package connection;
+package es.salesianos.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import es.salesianos.model.User;
 
-public class ConnectionH2 implements ConnectionManager {
+public class H2Connection implements ConnectionManager {
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
