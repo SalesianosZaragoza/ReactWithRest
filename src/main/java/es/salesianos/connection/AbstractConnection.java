@@ -28,11 +28,13 @@ public abstract class AbstractConnection {
 	}
 
 	public void close(Connection conn) {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+		if (null != conn) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 
 	}

@@ -1,5 +1,8 @@
 package es.salesianos.connection;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class H2Connection extends AbstractConnection {
 
 	@Override

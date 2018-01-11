@@ -10,6 +10,7 @@ prefix = "form"%>
 <title>Formulario de datos</title>
 </head>
 <body>
+
 	<form:form action="welcome" method="post">
 		<span>dni:</span> 
 		<form:input  type="text" path="dni"/><br/>

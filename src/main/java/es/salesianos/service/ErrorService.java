@@ -1,5 +1,7 @@
 package es.salesianos.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import es.salesianos.repository.UserRepository;
 
 @Component
 @Profile("huesca")
-public class UserService implements Service {
+public class ErrorService implements Service {
 
 	@Autowired
 	private UserAssembler assembler;
@@ -24,6 +26,11 @@ public class UserService implements Service {
 	}
 
 	public void insertOrupdateUser(User user) {
+		throw new RuntimeException("he reventado");
+	}
+
+	@Override
+	public List<User> listAllUser() {
 		throw new RuntimeException("he reventado");
 	}
 
@@ -42,5 +49,6 @@ public class UserService implements Service {
 	public void setRepository(UserRepository repository) {
 		this.repository = repository;
 	}
+
 
 }

@@ -1,5 +1,7 @@
 package es.salesianos.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,11 @@ public class AuthorService implements Service {
 		} else {
 			repository.update(user);
 		}
+	}
+
+	@Override
+	public List<User> listAllUser() {
+		return repository.listAllUsers();
 	}
 
 	public UserAssembler getAssembler() {
