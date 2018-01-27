@@ -4,5 +4,5 @@ target/
 .classpath
 rebel.xml
 *.log
-
+node_modules/
 
