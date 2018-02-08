@@ -14,4 +14,8 @@ public interface Service {
 
 	List<User> listAllUser();
 
+	void delete(Integer id);
+
+	void delete(String tablename, Integer id);
+
 }

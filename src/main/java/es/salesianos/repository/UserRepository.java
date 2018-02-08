@@ -60,4 +60,13 @@ public class UserRepository {
 		return users;
 	}
 
+	public void delete(String tablename, Integer id) {
+		// log.debug("id: " + id.toString());
+		log.debug("tablename: " + tablename);
+		String sql = "DELETE FROM " + tablename + " WHERE dni = '?'";
+		log.debug(sql);
+		// jdbcTemplate.update(sql, id.toString());
+	}
+
+
 }

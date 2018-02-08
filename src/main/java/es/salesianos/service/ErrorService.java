@@ -50,5 +50,15 @@ public class ErrorService implements Service {
 		this.repository = repository;
 	}
 
+	@Override
+	public void delete(Integer id) {
+		throw new RuntimeException("he reventado");
+	}
+
+	@Override
+	public void delete(String tablename, Integer id) {
+		throw new RuntimeException("he reventado");
+
+	}
 
 }

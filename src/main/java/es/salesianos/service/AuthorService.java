@@ -56,4 +56,15 @@ public class AuthorService implements Service {
 		this.repository = repository;
 	}
 
+	@Override
+	public void delete(Integer id) {
+		String defaultTableName = "user";
+		this.delete(defaultTableName, id);
+	}
+
+	@Override
+	public void delete(String tablename, Integer id) {
+		repository.delete(tablename, id);
+	}
+
 }
