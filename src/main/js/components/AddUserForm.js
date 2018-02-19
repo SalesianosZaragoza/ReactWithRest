@@ -5,9 +5,11 @@ export default class AddUserForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      "username": "",
-      "apellido": "",
-      "dni": ""
+
+      nombre: "",
+      apellido: "",
+      dni: ""
+    
     }
   }
 
@@ -18,11 +20,12 @@ export default class AddUserForm extends React.Component {
   keyPressed(e) {
     if (e.keyCode == 13) { // If enter is pressed
       this.addUser();
+      console.log("item inserted")
     }
   }
 
   addUser() {
-    this.props.addUser(this.state.username);
+    this.props.addUser(this.state);
   }
 
   render() {
@@ -36,13 +39,13 @@ export default class AddUserForm extends React.Component {
           <input type="text" class="form-control"
             name="nombre"
             placeholder="Add a new user name..."
-            value={this.state.name}
+            value={this.state.nombre}
             onChange={this.handleChange.bind(this)}
             onKeyDown={this.keyPressed.bind(this)} />
           <input type="text" class="form-control"
             name="apellido"
             placeholder="Add a new user apellido..."
-            value={this.state.surname}
+            value={this.state.apellido}
             onChange={this.handleChange.bind(this)}
             onKeyDown={this.keyPressed.bind(this)} />
           <input type="text" class="form-control"
