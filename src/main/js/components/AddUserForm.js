@@ -1,4 +1,5 @@
 import React from "react";
+import { addUser } from "../actions/userActions"
 
 export default class AddUserForm extends React.Component {
 
@@ -17,15 +18,15 @@ export default class AddUserForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  keyPressed(e) {
-    if (e.keyCode == 13) { // If enter is pressed
+  keyPressed(event) {
+    if (event.keyCode == 13) { // If enter is pressed
       this.addUser();
       console.log("item inserted")
     }
   }
 
   addUser() {
-    this.props.addUser(this.state);
+    addUser(this.state);
   }
 
   render() {
