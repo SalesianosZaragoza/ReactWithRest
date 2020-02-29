@@ -9,16 +9,13 @@ export default class UserList extends React.Component {
 		this.state = { users: [] }
 	}
 
-  render() {
+	render() {
 		if (this.state.users.length == 0) {	
 			fetch('/api/v1/user/list/')
 			.then((response) => {
-				return response.json();
+				var user = response.json(); 
+				this.state = { users: [...this.state.users, user] }
 			})			
-			.then((user) => {
-        		this.setState({ users: user })
-      		})
-			
 		}
 
 		if (this.state.users.length > 0) {
@@ -29,20 +26,15 @@ export default class UserList extends React.Component {
 					userItems.push(<UserItem user={usuario} />)
 				}
 			)
-		
 		return (
 				<div>
 					{userItems}
 					<UserCount  count={userItems.length}/>
 				</div>
 			)
-			
-		
 		} else {
 			return <p className="text-center">Loading users...</p>
 		}
-
-
     
-  }
+	}
 }

@@ -25,6 +25,7 @@ public class PersonController {
 	@Autowired
 	private Service service;
 
+	// http://localhost:8080/api/v1/user/delete/equipo/
 	@RequestMapping(value = "/delete/{tablename}/", method = RequestMethod.GET)
 	public ResponseEntity delete(@PathVariable String tablename, @RequestParam(required = false) Integer id) {
 		service.delete(tablename, id);
@@ -40,8 +41,8 @@ public class PersonController {
 
 	@PostMapping
 	@RequestMapping(value = "/list")
-	public ResponseEntity<List<User>> ListAll() {
-		return new ResponseEntity<>(service.listAllUser(), HttpStatus.CREATED);
+	public ResponseEntity<List<User>> ListWithFilter(@RequestParam String filter) {
+		return new ResponseEntity<>(service.listAllUser(), HttpStatus.OK);
 	}
 
 

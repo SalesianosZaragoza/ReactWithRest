@@ -8,19 +8,5 @@ module.exports = {
     output: {
         path: __dirname,
         filename: './src/main/resources/static/built/bundle.js'
-    },
-    module: {
-        loaders: [
-            {
-                test: path.join(__dirname, '.'),
-                exclude: /(node_modules)/,
-                loader: 'babel',
-                query: {
-                    cacheDirectory: true,
-                    presets: ['es2015', 'stage-0', 'react'],
-                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-                }
-            }
-        ]
     }
 };

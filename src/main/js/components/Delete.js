@@ -10,13 +10,11 @@ export default class Delete extends React.Component {
     
     delete(event){
         fetch('/api/v1/user/delete/user/?id='+this.state.id)
-        
     }
 
-  render() {
-		
+	render() {
 		return (
-				<button onClick={this.delete.bind(this)}>
+				<button onClick={this.delete}>
 					borrar dni
 				</button>
 			)

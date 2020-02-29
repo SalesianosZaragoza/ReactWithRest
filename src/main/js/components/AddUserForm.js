@@ -35,31 +35,32 @@ export default class AddUserForm extends React.Component {
     }
 
     return (
-      <div class="input-group col-md-4 col-md-offset-4" style={cssStyle}>
-        <div>
-          <input type="text" class="form-control"
-            name="nombre"
-            placeholder="Add a new user name..."
-            value={this.state.nombre}
-            onChange={this.handleChange.bind(this)}
-            onKeyDown={this.keyPressed.bind(this)} />
-          <input type="text" class="form-control"
-            name="apellido"
-            placeholder="Add a new user apellido..."
-            value={this.state.apellido}
-            onChange={this.handleChange.bind(this)}
-            onKeyDown={this.keyPressed.bind(this)} />
-          <input type="text" class="form-control"
-            placeholder="Add a new user document id..."
-            name="dni"
-            value={this.state.dni}
-            onChange={this.handleChange.bind(this)}
-            onKeyDown={this.keyPressed.bind(this)} />
-        </div>
-        <div>
-          <button className="btn btn-default" type="button" onClick={this.addUser.bind(this)}>Insert User</button>
-        </div>
+    <div class="input-group col-md-4 col-md-offset-4" style={cssStyle}>
+      <div>
+        <input type="text" class="form-control"
+          name="nombre"
+          placeholder="Add a new user name..."
+          value={this.state.nombre}
+          onChange={handleChange.bind(this)}
+          onKeyDown={keyPressed.bind(this)} />
+        <input type="text" class="form-control"
+          name="apellido"
+          placeholder="Add a new user apellido..."
+          value={this.state.apellido}
+          onChange={handleChange.bind(this)}
+          onKeyDown={keyPressed.bind(this)} />
+        <input type="text" class="form-control"
+          placeholder="Add a new user document id..."
+          name="dni"
+          value={this.state.dni}
+          onChange={handleChange.bind(this)}
+          onKeyDown={this.keyPressed.bind(this)} />
       </div>
-    );
+      <div>
+        <button className="btn btn-default" type="button" onClick={this.addUser.bind(this)}>Insert User</button>
+      </div>
+    </div>
+>
+      );
   }
 }
