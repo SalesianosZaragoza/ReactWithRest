@@ -6,7 +6,6 @@
 	<groupId>es.salesianos.edu</groupId>
 	<artifactId>Servlet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -156,6 +155,11 @@
 					</execution>
 				</executions>
 			</plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.2.2.RELEASE</version>
+    </plugin>
 
 		</plugins>
 	</build>
